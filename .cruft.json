@@ -1,0 +1,17 @@
+{
+    "template": "https://github.com/nickderobertis/cookiecutter-pypi-sphinx",
+    "commit": "b7eab35a0360b489172e7b20ac0dcae23a17a446",
+    "context": {
+        "cookiecutter": {
+            "package_name": "transforms_fin",
+            "full_name": "Financial Data Transforms for datacode",
+            "repo_name": "transforms-fin",
+            "repo_username": "nickderobertis",
+            "short_description": "A set of Transforms meant for financial analysis to be used with the datacode package",
+            "package_author": "Nick DeRobertis",
+            "author_email": "whoopnip@gmail.com",
+            "google_analytics_id": "UA-158949840-1",
+            "_template": "https://github.com/nickderobertis/cookiecutter-pypi-sphinx"
+        }
+    }
+}

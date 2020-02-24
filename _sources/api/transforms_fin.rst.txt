@@ -1,0 +1,19 @@
+transforms\_fin package
+=======================
+
+.. automodule:: transforms_fin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+transforms\_fin.portfolio module
+--------------------------------
+
+.. automodule:: transforms_fin.portfolio
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

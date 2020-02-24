@@ -22,6 +22,7 @@ mypy = "*"
 pypandoc = "*"
 cruft = "*"
 datacode = "*"
+pd-utils = "*"
 
 [requires]
 python_version = "3.7"

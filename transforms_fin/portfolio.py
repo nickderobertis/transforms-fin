@@ -31,10 +31,10 @@ def portfolio_data_func(col: dc.Column, variable: dc.Variable, source: dc.DataSo
         if by_var_names:
             kwargs['byvars'] = by_var_names
 
-    # TODO: remove portfolio column reordering once pd_utils.portfolio retains order
+    # TODO [$5e531cd3ca51d20008663701]: remove portfolio column reordering once pd_utils.portfolio retains order
     orig_columns = [col for col in source.df.columns]
 
-    # TODO: remore portfolio index handling once pd_utils.portfolio supports using index
+    # TODO [$5e531cd3ca51d20008663702]: remore portfolio index handling once pd_utils.portfolio supports using index
     if source.index_vars:
         orig_index_names = source.df.index.names
         source.df.reset_index(inplace=True)

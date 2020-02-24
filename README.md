@@ -18,9 +18,15 @@ pip install transforms_fin
 A simple example:
 
 ```python
-import transforms_fin
+import transforms_fin  # transforms are automatically loaded upon import
+import datacode as dc
 
-# Do something with transforms_fin
+a = dc.Variable('a', 'A')
+vc = dc.VariableCollection(a)
+
+# Portfolio transform
+vc.a.port()
+
 ```
 
 ## Links

@@ -1,3 +1,5 @@
+from typing import List
+
 import datacode as dc
 from pd_utils import portfolio
 from sympy import Symbol
@@ -18,8 +20,8 @@ def portfolio_data_func(col: dc.Column, variable: dc.Variable, source: dc.DataSo
     if 'portvar' in kwargs:
         raise ValueError('cannot pass portvar as variable will be transformed into portvar')
 
-    if 'byvars' not in kwargs:
-        by_vars = []
+    if 'byvars' not in kwargs and source.index_vars:
+        by_vars: List[dc.Variable] = []
         other_indices = [col_idx for col_idx in col.indices if col_idx]
         if len(other_indices) > 0:
             # Got other indices
@@ -29,17 +31,27 @@ def portfolio_data_func(col: dc.Column, variable: dc.Variable, source: dc.DataSo
         if by_var_names:
             kwargs['byvars'] = by_var_names
 
-    # TODO: rework portfolio once pd_utils.portfolio supports using index
-    orig_index_names = source.df.index.names
+    # TODO: remove portfolio column reordering once pd_utils.portfolio retains order
+    orig_columns = [col for col in source.df.columns]
+
+    # TODO: remore portfolio index handling once pd_utils.portfolio supports using index
+    if source.index_vars:
+        orig_index_names = source.df.index.names
+        source.df.reset_index(inplace=True)
+        orig_columns = [col for col in source.df.columns]
+
     source.df = portfolio(
-        source.df.reset_index(),
+        source.df,
         variable.name,
         **kwargs
     )
 
     source.df.drop([variable.name], axis=1, inplace=True)
     source.df.rename(columns={'portfolio': variable.name}, inplace=True)
-    source.df.set_index(orig_index_names, inplace=True)
+    source.df = source.df[orig_columns]
+
+    if source.index_vars:
+        source.df.set_index(orig_index_names, inplace=True)
     return source
 
 

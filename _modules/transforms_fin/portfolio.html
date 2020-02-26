@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>transforms_fin.portfolio &mdash; transforms_fin 0.1.0 documentation</title>
+  <title>transforms_fin.portfolio &mdash; transforms_fin 0.1.1 documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.1.1
               </div>
             
           
@@ -170,11 +170,11 @@
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Symbol</span>
 
 
-<div class="viewcode-block" id="portfolio_name_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.portfolio.portfolio_name_func">[docs]</a><span class="k">def</span> <span class="nf">portfolio_name_func</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="portfolio_name_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.portfolio.portfolio_name_func">[docs]</a><span class="k">def</span> <span class="nf">portfolio_name_func</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; Portfolio&#39;</span></div>
 
 
-<div class="viewcode-block" id="portfolio_symbol_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.portfolio.portfolio_symbol_func">[docs]</a><span class="k">def</span> <span class="nf">portfolio_symbol_func</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span> <span class="n">Symbol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Symbol</span><span class="p">:</span>
+<div class="viewcode-block" id="portfolio_symbol_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.portfolio.portfolio_symbol_func">[docs]</a><span class="k">def</span> <span class="nf">portfolio_symbol_func</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span> <span class="n">Symbol</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Symbol</span><span class="p">:</span>
     <span class="n">sym_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
     <span class="n">new_sym_str</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\text</span><span class="si">{Port}</span><span class="s1">(&#39;</span> <span class="o">+</span> <span class="n">sym_str</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
     <span class="n">sym</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="n">new_sym_str</span><span class="p">)</span>
@@ -196,10 +196,10 @@
         <span class="k">if</span> <span class="n">by_var_names</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;byvars&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">by_var_names</span>
 
-    <span class="c1"># TODO: remove portfolio column reordering once pd_utils.portfolio retains order</span>
+    <span class="c1"># TODO [#1]: remove portfolio column reordering once pd_utils.portfolio retains order</span>
     <span class="n">orig_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
 
-    <span class="c1"># TODO: remore portfolio index handling once pd_utils.portfolio supports using index</span>
+    <span class="c1"># TODO [#2]: remore portfolio index handling once pd_utils.portfolio supports using index</span>
     <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">index_vars</span><span class="p">:</span>
         <span class="n">orig_index_names</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span>
         <span class="n">source</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

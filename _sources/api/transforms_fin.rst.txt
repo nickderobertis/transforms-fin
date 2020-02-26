@@ -17,3 +17,11 @@ transforms\_fin.portfolio module
    :undoc-members:
    :show-inheritance:
 
+transforms\_fin.winsorize module
+--------------------------------
+
+.. automodule:: transforms_fin.winsorize
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

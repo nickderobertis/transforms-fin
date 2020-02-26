@@ -1,3 +1,5 @@
+from datacode import VariableCollection
+
 import transforms_fin
 
 import pandas as pd
@@ -47,6 +49,12 @@ class TransformPortfolioTest(TransformTest):
         ], columns=['A Portfolio', 'B Portfolio', 'C']
     )
 
+    def assert_variable_names_and_symbols(self, vc: VariableCollection):
+        assert str(vc.a.port().symbol) == r'\text{Port}(\text{A})'
+        assert str(vc.b.port().symbol) == r'\text{Port}(\text{B})'
+        assert vc.a.port().name == 'A Portfolio'
+        assert vc.b.port().name == 'B Portfolio'
+
 
 class TestPortfolioTransform(TransformPortfolioTest):
 
@@ -61,8 +69,7 @@ class TestPortfolioTransform(TransformPortfolioTest):
         ]
         ds = self.create_source(df=None, columns=all_cols, load_variables=load_variables)
         assert_frame_equal(ds.df, self.expect_df_no_byvars)
-        assert str(vc.a.port().symbol) == r'\text{Port}(\text{A})'
-        assert str(vc.b.port().symbol) == r'\text{Port}(\text{B})'
+        self.assert_variable_names_and_symbols(vc)
 
     def test_portfolio_auto_byvars(self):
         vc, a, b, c = self.create_variable_collection(with_index=True)
@@ -75,8 +82,7 @@ class TestPortfolioTransform(TransformPortfolioTest):
         ]
         ds = self.create_source(df=None, columns=all_cols, load_variables=load_variables)
         assert_frame_equal(ds.df, self.expect_df_with_c_index)
-        assert str(vc.a.port().symbol) == r'\text{Port}(\text{A})'
-        assert str(vc.b.port().symbol) == r'\text{Port}(\text{B})'
+        self.assert_variable_names_and_symbols(vc)
 
     def test_portfolio_manual_byvars(self):
         vc, a, b, c = self.create_variable_collection()
@@ -89,5 +95,4 @@ class TestPortfolioTransform(TransformPortfolioTest):
         ]
         ds = self.create_source(df=None, columns=all_cols, load_variables=load_variables)
         assert_frame_equal(ds.df, self.expect_df_manual_c_byvars)
-        assert str(vc.a.port().symbol) == r'\text{Port}(\text{A})'
-        assert str(vc.b.port().symbol) == r'\text{Port}(\text{B})'
+        self.assert_variable_names_and_symbols(vc)

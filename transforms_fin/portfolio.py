@@ -5,11 +5,11 @@ from pd_utils import portfolio
 from sympy import Symbol
 
 
-def portfolio_name_func(name: str, **kwargs) -> str:
+def portfolio_name_func(name: str, *args, **kwargs) -> str:
     return name + ' Portfolio'
 
 
-def portfolio_symbol_func(sym: Symbol, **kwargs) -> Symbol:
+def portfolio_symbol_func(sym: Symbol, *args, **kwargs) -> Symbol:
     sym_str = str(sym)
     new_sym_str = r'\text{Port}(' + sym_str + ')'
     sym = Symbol(new_sym_str)

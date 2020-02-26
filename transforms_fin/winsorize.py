@@ -12,8 +12,6 @@ def winsorize_symbol_func(sym: Symbol, *args, **kwargs) -> Symbol:
 
 
 def winsorize_data_func(col: dc.Column, variable: dc.Variable, source: dc.DataSource, *args, **kwargs) -> dc.DataSource:
-    # TODO [#4]: add tests
-
     source.df = winsorize(
         source.df,
         *args,

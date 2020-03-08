@@ -9,6 +9,14 @@ transforms\_fin package
 Submodules
 ----------
 
+transforms\_fin.log module
+--------------------------
+
+.. automodule:: transforms_fin.log
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 transforms\_fin.portfolio module
 --------------------------------
 

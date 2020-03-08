@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>transforms_fin.winsorize &mdash; transforms_fin 0.1.2 documentation</title>
+  <title>transforms_fin.log &mdash; transforms_fin 0.1.2 documentation</title>
   
 
   
@@ -147,7 +147,7 @@
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>transforms_fin.winsorize</li>
+      <li>transforms_fin.log</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,36 +162,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for transforms_fin.winsorize</h1><div class="highlight"><pre>
+  <h1>Source code for transforms_fin.log</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">datacode</span> <span class="k">as</span> <span class="nn">dc</span>
-<span class="kn">from</span> <span class="nn">pd_utils</span> <span class="kn">import</span> <span class="n">winsorize</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Symbol</span>
 
 
-<div class="viewcode-block" id="winsorize_name_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.winsorize.winsorize_name_func">[docs]</a><span class="k">def</span> <span class="nf">winsorize_name_func</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">name</span></div>
+<div class="viewcode-block" id="log_name_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.log.log_name_func">[docs]</a><span class="k">def</span> <span class="nf">log_name_func</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Ln(</span><span class="si">{name}</span><span class="s1">)&#39;</span></div>
 
 
-<div class="viewcode-block" id="winsorize_symbol_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.winsorize.winsorize_symbol_func">[docs]</a><span class="k">def</span> <span class="nf">winsorize_symbol_func</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span> <span class="n">Symbol</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Symbol</span><span class="p">:</span>
+<div class="viewcode-block" id="log_symbol_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.log.log_symbol_func">[docs]</a><span class="k">def</span> <span class="nf">log_symbol_func</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span> <span class="n">Symbol</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Symbol</span><span class="p">:</span>
+    <span class="n">sym_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+    <span class="n">new_sym_str</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\text</span><span class="si">{Ln}</span><span class="s1">(&#39;</span> <span class="o">+</span> <span class="n">sym_str</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+    <span class="n">sym</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="n">new_sym_str</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sym</span></div>
 
 
-<div class="viewcode-block" id="winsorize_data_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.winsorize.winsorize_data_func">[docs]</a><span class="k">def</span> <span class="nf">winsorize_data_func</span><span class="p">(</span><span class="n">col</span><span class="p">:</span> <span class="n">dc</span><span class="o">.</span><span class="n">Column</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">dc</span><span class="o">.</span><span class="n">Variable</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">dc</span><span class="o">.</span><span class="n">DataSource</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dc</span><span class="o">.</span><span class="n">DataSource</span><span class="p">:</span>
-    <span class="n">source</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span>
-        <span class="n">source</span><span class="o">.</span><span class="n">df</span><span class="p">,</span>
-        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-        <span class="n">subset</span><span class="o">=</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span>
-    <span class="p">)</span>
+<div class="viewcode-block" id="log_data_func"><a class="viewcode-back" href="../../api/transforms_fin.html#transforms_fin.log.log_data_func">[docs]</a><span class="k">def</span> <span class="nf">log_data_func</span><span class="p">(</span><span class="n">col</span><span class="p">:</span> <span class="n">dc</span><span class="o">.</span><span class="n">Column</span><span class="p">,</span> <span class="n">variable</span><span class="p">:</span> <span class="n">dc</span><span class="o">.</span><span class="n">Variable</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">dc</span><span class="o">.</span><span class="n">DataSource</span><span class="p">,</span> <span class="n">shift</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dc</span><span class="o">.</span><span class="n">DataSource</span><span class="p">:</span>
+    <span class="n">source</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">source</span></div>
 
 
-<span class="n">winsorize_transform</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span>
-    <span class="s1">&#39;winsor&#39;</span><span class="p">,</span>
-    <span class="n">name_func</span><span class="o">=</span><span class="n">winsorize_name_func</span><span class="p">,</span>
-    <span class="n">data_func</span><span class="o">=</span><span class="n">winsorize_data_func</span><span class="p">,</span>
-    <span class="n">symbol_func</span><span class="o">=</span><span class="n">winsorize_symbol_func</span><span class="p">,</span>
+<span class="n">log_transform</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span>
+    <span class="s1">&#39;log&#39;</span><span class="p">,</span>
+    <span class="n">name_func</span><span class="o">=</span><span class="n">log_name_func</span><span class="p">,</span>
+    <span class="n">data_func</span><span class="o">=</span><span class="n">log_data_func</span><span class="p">,</span>
+    <span class="n">symbol_func</span><span class="o">=</span><span class="n">log_symbol_func</span><span class="p">,</span>
     <span class="n">data_func_target</span><span class="o">=</span><span class="s1">&#39;source&#39;</span>
 <span class="p">)</span>
 </pre></div>
